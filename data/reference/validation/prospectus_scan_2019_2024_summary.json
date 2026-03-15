@@ -1,0 +1,42 @@
+{
+  "input_rows": 2000,
+  "candidate_urls_found": 1737,
+  "downloadable_count": 1072,
+  "failed_count": 928,
+  "coverage_ratio": 0.536,
+  "source_breakdown": {
+    "cninfo_code_board": 976,
+    "eastmoney_code": 665,
+    "missing": 263,
+    "cninfo_code_all": 50,
+    "cninfo_name_board": 31,
+    "cninfo_name_all": 15
+  },
+  "failure_breakdown": {
+    "ok": 1072,
+    "not_pdf": 665,
+    "missing_candidate": 263
+  },
+  "downloadable_by_board": {
+    "上交所主板": 186,
+    "创业板": 407,
+    "北交所": 8,
+    "深交所主板": 124,
+    "科创板": 347
+  },
+  "downloadable_by_year": {
+    "2019": 200,
+    "2020": 320,
+    "2021": 113,
+    "2022": 226,
+    "2023": 131,
+    "2024": 82
+  },
+  "known_size_count": 1072,
+  "size_estimation_method": "exact_headers_only",
+  "estimated_total_bytes": 12458521050,
+  "estimated_total_gb": 11.603,
+  "mean_file_mb": 11.083,
+  "median_file_mb": 9.341,
+  "p90_file_mb": 18.759
+}
