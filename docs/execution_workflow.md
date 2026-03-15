@@ -101,14 +101,3 @@ python src/pipeline/run_regression.py --input data/processed/analysis_sample.csv
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\paper\build.ps1
 ```
-
-## 八、Demo 快速自检
-
-如果你只想验证后半段脚本是否能跑通：
-
-```powershell
-python scripts/demo/generate_synthetic_data.py --output-dir data/demo
-python src/pipeline/score_authenticity.py --screening data/demo/synthetic_firm_screening.csv --labels data/demo/synthetic_labels.csv --output data/demo/synthetic_auth_index.csv
-python src/pipeline/merge_post_ipo_financials.py --auth data/demo/synthetic_auth_index.csv --financials data/demo/synthetic_financials.csv --output data/demo/synthetic_analysis_sample.csv
-python src/pipeline/run_regression.py --input data/demo/synthetic_analysis_sample.csv --output-dir outputs/demo
-```

@@ -13,8 +13,6 @@
 ### 来自 `ipo_ai_disclosure_research_package`
 
 - `src/pipeline/`：完整主分析流水线。
-- `data/demo/`：合成测试数据。
-- `outputs/demo/`：示例回归输出。
 - `materials/core/`：核心研究材料，包括筛选规则、标注手册、变量定义、数据清单、LLM 模板。
 - `materials/core/ai_keywords_weighted.csv`：与当前筛选脚本直接配套的关键词表。
 - `materials/drafts/` 与 `materials/planning/`：提纲、摘要、引言草稿和研究进度安排。

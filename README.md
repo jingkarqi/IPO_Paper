@@ -4,19 +4,19 @@
 
 当前状态可以概括为两点：
 
-1. 骨架已经齐全：主流水线脚本、研究材料、论文章节、demo 数据和 demo 回归结果都已放好。
+1. 骨架已经齐全：主流水线脚本、研究材料和论文章节都已放好。
 2. 正式数据还没补齐：`data/raw/`、`data/interim/`、`data/processed/`、`outputs/tables/`、`outputs/figures/` 目前为空，说明正式样本尚未完整跑通。
 
 ## 一、根目录现在有什么
 
 ```text
 IPO_Paper/
-├── data/                  # 数据目录：参考资产、正式输入、中间产物、处理结果、demo
+├── data/                  # 数据目录：参考资产、正式输入、中间产物、处理结果
 ├── docs/                  # 执行流程与资产清单
 ├── materials/             # 关键词表、标注手册、变量定义、论文草稿、计划
 ├── outputs/               # 回归结果与图表输出
 ├── paper/                 # LaTeX 论文工程
-├── scripts/               # 数据抓取、demo 生成、LLM prompt 导出
+├── scripts/               # 数据抓取与 LLM prompt 导出
 ├── src/pipeline/          # 主分析流水线
 ├── AGENTS.md              # 仓库协作说明
 └── requirements.txt       # Python 依赖
@@ -41,12 +41,10 @@ IPO_Paper/
 
 - `scripts/data_collection/`：维护 IPO 样本底表，包含抓取、清洗、巨潮校验脚本
 - `scripts/llm/export_annotation_prompts.py`：把待标注文本导出成 LLM 批处理 prompt
-- `scripts/demo/generate_synthetic_data.py`：生成合成数据，用于跑 demo
 
 ### 3. `data/`
 
 - `reference/`：已整理好的 IPO 底表和校验样例
-- `demo/`：可直接用于自检的合成数据
 - `raw/`：正式研究输入，当前应补入 `post_ipo_financials.csv` 和 `firm_labels.csv`
 - `interim/`：主流水线中间产物，当前为空
 - `processed/`：最终分析样本，当前为空
@@ -125,15 +123,6 @@ python scripts/data_collection/build_ipo_master_tushare.py
 ```
 
 需要先配置环境变量 `TUSHARE_TOKEN`。
-
-Demo 自检：
-
-```powershell
-python scripts/demo/generate_synthetic_data.py --output-dir data/demo
-python src/pipeline/score_authenticity.py --screening data/demo/synthetic_firm_screening.csv --labels data/demo/synthetic_labels.csv --output data/demo/synthetic_auth_index.csv
-python src/pipeline/merge_post_ipo_financials.py --auth data/demo/synthetic_auth_index.csv --financials data/demo/synthetic_financials.csv --output data/demo/synthetic_analysis_sample.csv
-python src/pipeline/run_regression.py --input data/demo/synthetic_analysis_sample.csv --output-dir outputs/demo
-```
 
 编译论文：
 
