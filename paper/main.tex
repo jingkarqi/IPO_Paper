@@ -1,0 +1,53 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue
+}
+
+\setstretch{1.35}
+\captionsetup{font=small}
+
+\title{数字化转型还是叙事包装？\\IPO企业AI相关披露真实性对上市后经营表现的影响研究\\基于招股说明书与问询回复的文本证据}
+\author{研究底稿}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\parbox{0.92\textwidth}{
+\small
+\textbf{说明：}本文为可直接进入实证执行与写作阶段的完整论文底稿。由于当前工作区尚未导入正式样本数据，描述性统计与回归结果部分保留了可替换模板，待按本仓库脚本跑出正式结果后替换。
+}
+\end{center}
+
+\input{sections/01_abstract}
+\input{sections/02_introduction}
+\input{sections/03_literature}
+\input{sections/04_design}
+\input{sections/05_results}
+\input{sections/06_conclusion}
+\appendix
+\input{sections/appendix}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

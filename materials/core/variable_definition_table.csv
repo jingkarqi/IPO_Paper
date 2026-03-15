@@ -1,0 +1,20 @@
+﻿variable_code,variable_name_cn,type,definition,formula_or_rule,data_source,expected_sign
+auth_index,AI披露真实性综合指数,核心解释变量,基于提及强度、场景具体性、表述审慎性标准化后加权合成,0.3*mention_z + 0.4*scene_z + 0.3*prudence_z,招股书、问询回复、人工/LLM标签,+
+pack_index,AI披露包装性指数,替代解释变量,用高提及但低具体性、低审慎性和较高包装风险表征概念包装,0.4*mention_z - 0.3*scene_z - 0.2*prudence_z + 0.1*packaging_z,招股书、问询回复、人工/LLM标签,-
+mention_intensity,提及强度,真实性维度之一,衡量AI/数字化关键词出现频率、相关段落占比与问询回复提及情况,z(核心关键词密度)+z(相关段落占比)+z(回复函AI提及指示),文本脚本自动计算,+
+scene_specificity,场景具体性,真实性维度之一,衡量企业是否披露具体业务场景、环节、技术对象和输出,企业级0-3评分后标准化,LLM辅助+人工复核,+
+prudence,表述审慎性,真实性维度之一,衡量披露是否边界清晰、谨慎、少承诺,企业级0-3评分后标准化,LLM辅助+人工复核,+
+packaging_risk,包装风险,辅助变量,衡量宣传词、概念词和空泛叙事程度,企业级0-3评分后标准化,LLM辅助+人工复核,-
+evidence_support,证据支撑,辅助变量,衡量披露是否伴随研发、专利、系统、团队、项目等硬证据,企业级0-2评分,文本+人工复核,+
+roa_t1,上市后第一年ROA,结果变量,盈利能力,净利润/平均总资产,上市后第一年年报,+
+rev_growth_t1,上市后第一年营业收入增长率,结果变量,成长性,(营业收入_t1-营业收入_t0)/营业收入_t0,上市前后年报,+
+asset_turnover_t1,上市后第一年总资产周转率,结果变量,运营效率,营业收入/平均总资产,上市后第一年年报,+
+perf_index,综合经营表现指数,稳健性结果变量,对ROA、收入增长率、总资产周转率标准化后求均值,"mean(z(roa_t1), z(rev_growth_t1), z(asset_turnover_t1))",年报/财务数据库,+
+ln_assets_preipo,企业规模,控制变量,上市前一年总资产对数,ln(总资产),上市前一年年报/招股书,?
+leverage_preipo,资产负债率,控制变量,上市前一年负债水平,总负债/总资产,上市前一年年报/招股书,?
+firm_age,企业年龄,控制变量,IPO年份减成立年份,IPO年-成立年,招股书,?
+rd_intensity_preipo,研发强度,控制变量,上市前一年研发支出强度,研发费用/营业收入,招股书/上市前年报,+
+soe,国有企业虚拟变量,控制变量,国企=1，其他=0,dummy,招股书/企业性质信息,?
+board,上市板块,控制变量,主板/科创板/创业板/北交所,categorical,IPO元数据,?
+industry,行业,固定效应,证监会行业或申万一级行业,categorical,IPO元数据/财务库,?
+ipo_year,上市年份,固定效应,企业IPO年份,categorical,IPO元数据,?

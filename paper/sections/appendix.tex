@@ -1,0 +1,43 @@
+\section{附录：核心变量与标注规则摘要}
+
+\subsection{核心变量定义}
+
+\begin{longtable}{p{3cm}p{4cm}p{7cm}}
+\toprule
+变量名 & 中文名称 & 度量说明 \\
+\midrule
+\endfirsthead
+\toprule
+变量名 & 中文名称 & 度量说明 \\
+\midrule
+\endhead
+AuthIndex & AI 披露真实性综合指数 & 对提及强度、场景具体性和表述审慎性标准化后按 $0.20/0.45/0.35$ 加权。 \\
+PackagingIndex & 叙事包装性指数 & 基于包装性评分及相关包装特征形成的反向指标。 \\
+ROA & 上市后 ROA & 上市后第一年净利润与平均总资产之比。 \\
+RevenueGrowth & 营业收入增长率 & 上市后第一年营业收入同比增速。 \\
+AssetTurnover & 总资产周转率 & 上市后第一年营业收入与平均总资产之比。 \\
+PerfIndex & 综合经营表现指数 & 对 ROA、营业收入增长率和总资产周转率标准化后取均值。 \\
+LnAssets & 企业规模 & 总资产取自然对数。 \\
+Leverage & 资产负债率 & 总负债除以总资产。 \\
+FirmAge & 企业年龄 & 上市年份减去成立年份。 \\
+RDIntensity & 研发强度 & 研发费用除以营业收入。 \\
+SOE & 所有制性质 & 国有企业取 1，否则取 0。 \\
+\bottomrule
+\end{longtable}
+
+\subsection{标注规则摘要}
+
+\begin{table}[H]
+\centering
+\caption{文本标注维度摘要}
+\begin{tabular}{p{3cm}p{9.5cm}}
+\toprule
+维度 & 核心判断标准 \\
+\midrule
+提及强度 & 看关键词频次、相关段落数和文本占比，识别企业“说了多少”。 \\
+场景具体性 & 看是否落到具体业务场景、流程节点、系统模块、组织安排和应用结果。 \\
+表述审慎性 & 看是否说明实施边界、阶段进度和限制条件，是否区分“已落地”和“拟推进”。 \\
+包装性 & 看是否存在宏大口号、概念堆砌、承诺化措辞和明显夸大修辞。 \\
+\bottomrule
+\end{tabular}
+\end{table}
