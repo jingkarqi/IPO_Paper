@@ -9,7 +9,7 @@ import pandas as pd
 
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_cleaned_2019_2023.xlsx"
+DEFAULT_INPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_cleaned_2019_2024.xlsx"
 DEFAULT_OUTPUT = ROOT_DIR / "data" / "reference" / "validation" / "ipo_master_cninfo_validation_sample.xlsx"
 
 

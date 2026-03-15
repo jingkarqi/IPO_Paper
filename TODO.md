@@ -5,6 +5,7 @@
 ## 1. 先锁定口径，避免后面返工
 
 - [ ] 确认研究窗口是否以 `2019-2024` 为主样本。——已确认：`2019.1.1~2024.12.31`
+- [ ] 明确 IPO 样本时间口径。——已确认：统一按上市日期（`list_date` / `listing_date`）界定样本窗口。
 - [ ] 确认样本范围是否覆盖全部 A 股 IPO，还是先用注册制板块作为技术性降维样本。——已确认：覆盖全部A股IPO。
 - [ ] 明确“上市后第一年”口径。
   - 建议写清是“IPO 后第一个完整会计年度”还是“上市后自然年”。——已确认：第一个完整会计年度
@@ -116,7 +117,7 @@ python scripts/data_collection/validate_ipo_by_cninfo.py --limit 30
 
 ### 3.5 底表阶段验收标准
 
-- [ ] `data/reference/ipo_master/ipo_master_cleaned_2019_2023.xlsx` 已存在。
+- [ ] `data/reference/ipo_master/ipo_master_cleaned_2019_2024.xlsx` 已存在。
 - [ ] 每家企业至少有公司名、股票代码、板块、上市日期、IPO 年份。
 - [ ] 研究窗口内企业名单数量稳定，去重逻辑明确。
 - [ ] 进入正式文本处理的企业都已经能匹配到 PDF 路径。
@@ -161,7 +162,7 @@ python scripts/data_collection/validate_ipo_by_cninfo.py --limit 30
 
 ### 4.5 这一阶段的产物
 
-- [ ] 更新后的 `ipo_master_cleaned_2019_2023.xlsx` 已填好 `prospectus_pdf`。
+- [ ] 更新后的 `ipo_master_cleaned_2019_2024.xlsx` 已填好 `prospectus_pdf`。
 - [ ] 如有需要，另存一份 PDF 路径追踪表。
 
 ## 5. 收集问询函与回复函 PDF
@@ -315,7 +316,7 @@ python scripts/data_collection/validate_ipo_by_cninfo.py --limit 30
 - [ ] 用清洗后的 IPO 底表生成 manifest。
 
 ```powershell
-python src/pipeline/build_sample_manifest.py --input data/reference/ipo_master/ipo_master_cleaned_2019_2023.xlsx --output data/interim/ipo_manifest.csv --year-start 2019 --year-end 2023
+python src/pipeline/build_sample_manifest.py --input data/reference/ipo_master/ipo_master_cleaned_2019_2024.xlsx --output data/interim/ipo_manifest.csv --year-start 2019 --year-end 2024
 ```
 
 - [ ] 检查 `data/interim/ipo_manifest.csv` 是否包含以下字段：
@@ -665,7 +666,7 @@ powershell -ExecutionPolicy Bypass -File .\paper\build.ps1
 
 ## 19. 建议最终保留的成果文件
 
-- [ ] `data/reference/ipo_master/ipo_master_cleaned_2019_2023.xlsx`
+- [ ] `data/reference/ipo_master/ipo_master_cleaned_2019_2024.xlsx`
 - [ ] `data/raw/post_ipo_financials.csv`
 - [ ] `data/raw/firm_labels.csv`
 - [ ] `data/interim/ipo_manifest.csv`

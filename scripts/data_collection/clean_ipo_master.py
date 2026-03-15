@@ -7,8 +7,8 @@ import pandas as pd
 
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_raw_2019_2023.xlsx"
-DEFAULT_OUTPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_cleaned_2019_2023.xlsx"
+DEFAULT_INPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_raw_2019_2024.xlsx"
+DEFAULT_OUTPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_cleaned_2019_2024.xlsx"
 
 ALIASES = {
     "ts_code": ["ts_code", "TS_CODE"],
@@ -16,7 +16,7 @@ ALIASES = {
     "name": ["name", "company", "company_name", "证券简称", "公司名称"],
     "exchange": ["exchange", "交易所"],
     "board": ["board", "板块", "上市板块"],
-    "list_date": ["list_date", "listing_date", "ipo_date", "issue_date", "上市日期", "首发上市日期"],
+    "list_date": ["list_date", "listing_date", "issue_date", "上市日期", "首发上市日期"],
     "company_full_name": ["company_full_name", "公司全称", "发行人名称"],
 }
 
@@ -25,11 +25,11 @@ EXCLUDE_NAMES = {"招商南油"}
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="清洗 IPO 样本底表。")
+    parser = argparse.ArgumentParser(description="清洗 IPO 样本底表，时间口径统一按上市日期。")
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--start-date", default="2019-01-01")
-    parser.add_argument("--end-date", default="2023-12-31")
+    parser.add_argument("--end-date", default="2024-12-31")
     return parser.parse_args()
 
 

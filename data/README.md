@@ -43,8 +43,8 @@
 
 ### IPO 底表
 
-- `reference/ipo_master/ipo_master_raw_2019_2023.xlsx`
-- `reference/ipo_master/ipo_master_cleaned_2019_2023.xlsx`
+- `reference/ipo_master/ipo_master_raw_2019_2024.xlsx`
+- `reference/ipo_master/ipo_master_cleaned_2019_2024.xlsx`
 
 ### 校验样例
 
