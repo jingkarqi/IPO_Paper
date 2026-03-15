@@ -2,6 +2,8 @@
 
 ## 一、先维护 IPO 样本底表
 
+时间口径统一按上市日期，默认研究窗口为 `2019-01-01` 至 `2024-12-31`。
+
 优先使用 `scripts/data_collection/`：
 
 ```powershell
@@ -18,14 +20,14 @@ python scripts/data_collection/build_ipo_master_tushare.py
 
 当前整理好的参考底表放在：
 
-- `data/reference/ipo_master/ipo_master_raw_2019_2023.xlsx`
-- `data/reference/ipo_master/ipo_master_cleaned_2019_2023.xlsx`
+- `data/reference/ipo_master/ipo_master_raw_2019_2024.xlsx`
+- `data/reference/ipo_master/ipo_master_cleaned_2019_2024.xlsx`
 
 ## 二、准备正式输入数据
 
 需要准备的核心文件：
 
-- `data/reference/ipo_master/ipo_master_cleaned_2019_2023.xlsx`
+- `data/reference/ipo_master/ipo_master_cleaned_2019_2024.xlsx`
 - `data/raw/post_ipo_financials.csv`
 - 每家企业对应的 `prospectus_pdf` / `reply_pdf` 路径
 
@@ -37,7 +39,7 @@ python scripts/data_collection/build_ipo_master_tushare.py
 ## 三、生成标准化样本清单并抽取 PDF 文本
 
 ```powershell
-python src/pipeline/build_sample_manifest.py --input data/reference/ipo_master/ipo_master_cleaned_2019_2023.xlsx --output data/interim/ipo_manifest.csv --year-start 2019 --year-end 2023
+python src/pipeline/build_sample_manifest.py --input data/reference/ipo_master/ipo_master_cleaned_2019_2024.xlsx --output data/interim/ipo_manifest.csv --year-start 2019 --year-end 2024
 python src/pipeline/extract_pdf_text.py --manifest data/interim/ipo_manifest.csv --output-dir data/interim/text
 ```
 

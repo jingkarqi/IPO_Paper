@@ -9,7 +9,7 @@ import pandas as pd
 
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_cleaned_2019_2023.xlsx"
+DEFAULT_INPUT = ROOT_DIR / "data" / "reference" / "ipo_master" / "ipo_master_cleaned_2019_2024.xlsx"
 DEFAULT_OUTPUT = ROOT_DIR / "data" / "reference" / "validation" / "ipo_master_cninfo_validation_sample.xlsx"
 
 
@@ -53,6 +53,7 @@ def main() -> None:
                 result = {
                     "stock_code": stock_code,
                     "has_ipo_summary": 1,
+                    "股票代码_巨潮": first.get("股票代码"),
                     "招股公告日期": first.get("招股公告日期"),
                     "中签率公告日": first.get("中签率公告日"),
                     "上网发行日期": first.get("上网发行日期"),
@@ -67,6 +68,7 @@ def main() -> None:
                 result = {
                     "stock_code": stock_code,
                     "has_ipo_summary": 0,
+                    "股票代码_巨潮": None,
                     "招股公告日期": None,
                     "中签率公告日": None,
                     "上网发行日期": None,
@@ -81,6 +83,7 @@ def main() -> None:
             result = {
                 "stock_code": stock_code,
                 "has_ipo_summary": 0,
+                "股票代码_巨潮": None,
                 "招股公告日期": None,
                 "中签率公告日": None,
                 "上网发行日期": None,
@@ -100,6 +103,31 @@ def main() -> None:
     for column in ["招股公告日期", "中签率公告日", "上网发行日期", "上市日期_巨潮"]:
         if column in final_df.columns:
             final_df[column] = pd.to_datetime(final_df[column], errors="coerce").dt.strftime("%Y-%m-%d")
+
+    if "list_date" in final_df.columns:
+        final_df["list_date"] = pd.to_datetime(final_df["list_date"], errors="coerce").dt.strftime("%Y-%m-%d")
+
+    final_df["股票代码_巨潮"] = final_df["股票代码_巨潮"].astype(str).str.extract(r"(\d+)", expand=False).str.zfill(6)
+    final_df["stock_code_match"] = final_df["stock_code"].astype(str).str.zfill(6).eq(final_df["股票代码_巨潮"])
+    final_df["list_date_match"] = False
+    has_list_date = final_df["list_date"].notna() if "list_date" in final_df.columns else False
+    has_cninfo_date = final_df["上市日期_巨潮"].notna()
+    if "list_date" in final_df.columns:
+        final_df.loc[has_list_date & has_cninfo_date, "list_date_match"] = (
+            final_df.loc[has_list_date & has_cninfo_date, "list_date"] == final_df.loc[has_list_date & has_cninfo_date, "上市日期_巨潮"]
+        )
+
+    def classify_issue(row: pd.Series) -> str:
+        if int(row.get("has_ipo_summary", 0)) != 1:
+            return "missing_cninfo_summary"
+        if bool(row.get("list_date_match", False)):
+            return "ok"
+        if pd.isna(row.get("上市日期_巨潮")):
+            return "missing_cninfo_list_date"
+        return "list_date_mismatch"
+
+    final_df["validation_issue_type"] = final_df.apply(classify_issue, axis=1)
+    final_df["validation_scope_note"] = "巨潮 IPO 摘要接口可直接校验股票代码与上市日期，不返回公司简称和板块字段。"
 
     final_df.to_excel(output_path, index=False)
     print(f"[OK] wrote {output_path} with {len(final_df)} rows")

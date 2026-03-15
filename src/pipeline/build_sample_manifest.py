@@ -4,7 +4,8 @@
 
 支持 CSV / XLSX 输入，并尽量自动识别常见字段名称。
 输出统一字段：firm_id, company, stock_code, board, listing_date, ipo_year,
-industry, established_year, prospectus_pdf, reply_pdf
+industry, established_year, prospectus_pdf, reply_pdf。
+其中 listing_date / ipo_year 统一以上市日期生成。
 """
 
 from __future__ import annotations
@@ -19,7 +20,7 @@ ALIASES: Dict[str, List[str]] = {
     "company": ["company", "company_name", "name", "企业名称", "公司名称", "证券简称", "发行人名称", "company_full_name"],
     "stock_code": ["stock_code", "code", "股票代码", "证券代码", "公司代码"],
     "board": ["board", "板块", "上市板块"],
-    "listing_date": ["listing_date", "list_date", "ipo_date", "issue_date", "上市日期", "挂牌日期", "首发上市日期"],
+    "listing_date": ["listing_date", "list_date", "issue_date", "上市日期", "挂牌日期", "首发上市日期"],
     "industry": ["industry", "行业", "证监会行业", "申万行业"],
     "established_year": ["established_year", "成立年份", "设立年份"],
     "prospectus_pdf": ["prospectus_pdf", "招股书路径", "招股说明书PDF", "prospectus_path"],
